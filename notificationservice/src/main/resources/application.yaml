@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: notificationservice
+    version: 1.0.0
+#  datasource:
+#    url: jdbc:mysql://localhost:3306/notifi_db?createDatabaseIfNotExist=true
+#    username: ${USER_NAME}
+#    password: ${PASSWORD}
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+  web:
+    resources:
+      add-mappings: false
+server:
+  port: 8100
+management:
+  endpoint:
+    web:
+      exposure:
+        include: health, info
+  endpoints:
+    health:
+      show-details: always
+logging:
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+  level:
+    root: debug
