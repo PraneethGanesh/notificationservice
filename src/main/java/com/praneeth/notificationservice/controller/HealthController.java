@@ -26,11 +26,13 @@ import java.util.Map;
 @RestController
 public class HealthController {
 
-    @Value("${app.version:1.0.0}")
+    @Value("${APP_VERSION:1.0.0}")
     private String appVersion;
 
     @Value("${spring.application.name:Notification Service}")
     private String appName;
+    @Value("${SERVER_PORT: 8100}")
+    private String serverPort;
 
     /**
      * Returns the current health status of the application.
@@ -61,7 +63,7 @@ public class HealthController {
         Map<String, Object> response = new LinkedHashMap<>();
         response.put("application", appName);
         response.put("version", appVersion);
-        response.put("phase", "Phase 1 – REST API");
+        response.put("Server Port",serverPort);
         response.put("timestamp", LocalDateTime.now().toString());
         return ResponseEntity.ok(response);
     }
