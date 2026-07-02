@@ -1,6 +1,6 @@
 spring:
   application:
-    name: notificationservice
+    name: ${APP_NAME:notificationservice}
     version: 1.0.0
 #  datasource:
 #    url: jdbc:mysql://localhost:3306/notifi_db?createDatabaseIfNotExist=true
@@ -11,7 +11,8 @@ spring:
     resources:
       add-mappings: false
 server:
-  port: 8100
+  port: ${SERVER_PORT:8100}
+
 management:
   endpoint:
     web:
