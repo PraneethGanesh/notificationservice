@@ -31,7 +31,7 @@ pipeline {
             steps {
                 sh '''
                     docker rm -f notificationservice || true
-                    docker run -d --name notificationservice -p 8100:8100 notificationservice:latest
+                    docker run -d --name notificationservice -p 8100:9000 notificationservice:latest
                 '''
             }
         }
