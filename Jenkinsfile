@@ -2,13 +2,6 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout') {
-            steps {
-                git branch: 'main',
-                        url: 'https://github.com/PraneethGanesh/notificationservice.git'
-            }
-        }
-
         stage('Build') {
             steps {
                 sh 'mvn clean package -DskipTests'
@@ -39,7 +32,7 @@ pipeline {
 
     post {
         success {
-            echo 'Build, test, Docker build, and run completed successfully.'
+            echo 'Pipeline completed successfully.'
         }
 
         failure {
