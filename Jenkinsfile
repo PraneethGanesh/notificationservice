@@ -11,24 +11,39 @@ pipeline {
 
         stage('Build') {
             steps {
-                bat 'mvn clean package -DskipTests'
+                sh 'mvn clean package -DskipTests'
             }
         }
 
         stage('Test') {
             steps {
-                bat 'mvn test'
+                sh 'mvn test'
+            }
+        }
+
+        stage('Docker Build') {
+            steps {
+                sh 'docker build -t notificationservice:latest .'
+            }
+        }
+
+        stage('Docker Run') {
+            steps {
+                sh '''
+                    docker rm -f notificationservice || true
+                    docker run -d --name notificationservice -p 8100:9000 notificationservice:latest
+                '''
             }
         }
     }
 
     post {
         success {
-            echo 'Build and tests completed successfully.'
+            echo 'Build, test, Docker build, and run completed successfully.'
         }
 
         failure {
-            echo 'Build or tests failed.'
+            echo 'Pipeline failed.'
         }
     }
 }
