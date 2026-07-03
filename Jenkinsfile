@@ -16,7 +16,7 @@ pipeline {
 
         stage('Docker Build') {
             steps {
-                sh 'docker build -t notificationservice:latest .'
+                sh "docker build -t notificationservice:${BUILD_NUMBER} -t notificationservice:latest ."
             }
         }
 
@@ -24,7 +24,7 @@ pipeline {
             steps {
                 sh '''
                     docker rm -f notificationservice || true
-                    docker run -d --name notificationservice -p 8100:8100 notificationservice:latest
+                    docker run -d --name notificationservice -p 8100:8100 notificationservice:${BUILD_NUMBER}
                 '''
             }
         }
